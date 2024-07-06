@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +8,34 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
             background-color: #f0f0f0;
         }
+
         .container {
-            text-align: center;
+            max-width: 600px;
+            margin: 20px auto;
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
         }
+
         #question-title {
             font-size: 1.5em;
-            /* Riduci la dimensione del testo della domanda */
             margin-bottom: 20px;
-            /* Aggiungi margine inferiore per distanziare dal titolo */
+            text-align: left;
+            margin-top: 0;
         }
+
         #answers-list {
             list-style-type: none;
             padding: 0;
         }
+
         #answers-list li {
             margin: 5px 0;
             padding: 10px;
@@ -38,16 +43,39 @@
             border-radius: 4px;
             background-color: #f9f9f9;
             display: inline-block;
-            /* Imposta display inline-block per la larghezza minima */
         }
+
         button {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
         }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.8em;
+        }
+
+        /* Testo Domanda N°{numero} */
+        #question-number {
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            color: #888;
+            font-size: 0.8em;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1 id="question-title">Benvenuto nel BSC quiz preview!</h1>
@@ -59,6 +87,11 @@
         </ul>
         <button id="randomize-button">Prossimo Quiz</button>
     </div>
+    <footer>
+        Questo progetto è fan-made e non affiliato con Supercell o BrawlStars Esports.
+    </footer>
+    <div id="question-number">Domanda N° <span id="question-number-value"></span></div>
+
     <script>
         document.getElementById('randomize-button').addEventListener('click', fetchRandomQuestion);
 
@@ -83,6 +116,7 @@
                     ];
 
                     document.getElementById('question-title').innerText = questionTitle;
+                    document.getElementById('question-number-value').innerText = randomNumber;
                     answers.forEach((answer, index) => {
                         document.getElementById(`answer-${index + 1}`).innerText = answer || '';
                     });
